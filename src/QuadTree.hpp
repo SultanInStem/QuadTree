@@ -17,8 +17,8 @@ class QuadTree{
         QuadTree(const sf::FloatRect& bounds, int capacity); 
         ~QuadTree();
 
-        void insert(){
-
+        void insert(Point& point){
+            
         }
 };
 

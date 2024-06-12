@@ -3,7 +3,7 @@
 using std::cout; 
 
 int main(){
-    Canvas canvas(500,500);
+    Canvas canvas(700,500, 20);
     canvas.run(); 
     return 0; 
 }
