@@ -46,28 +46,28 @@ class QuadTree{
             isDivided = true;
             sf::RectangleShape northeast;
             northeast.setSize(sf::Vector2f(w, h));
-            northeast.setOrigin(sf::Vector2f(x + (w / 2), y - (h / 2)));
-            northeast.setPosition(sf::Vector2f(x + (w / 2), y - (h / 2) )); 
+            northeast.setOrigin(sf::Vector2f(x + (w / 4), y - (h / 4)));
+            northeast.setPosition(sf::Vector2f(x + (w / 4), y - (h / 4) )); 
             NE = new QuadTree(northeast, this->capacity);
 
             sf::RectangleShape northwest;
             northwest.setSize(sf::Vector2f(w, h));
-            northwest.setOrigin(sf::Vector2f(x - (w / 2), y - (h / 2) ));
-            northwest.setPosition(sf::Vector2f(x - (w / 2), y - (h / 2))); 
+            northwest.setOrigin(sf::Vector2f(x - (w / 4), y - (h / 4) ));
+            northwest.setPosition(sf::Vector2f(x - (w / 4), y - (h / 4))); 
             NW = new QuadTree(northwest,this->capacity);
 
 
             sf::RectangleShape southeast;
             southeast.setSize(sf::Vector2f(w , h ));
-            southeast.setOrigin(sf::Vector2f(x + (w / 2), y + (h / 2) ));
-            southeast.setPosition(sf::Vector2f(x + (w / 2), y + (h / 2) )); 
+            southeast.setOrigin(sf::Vector2f(x + (w / 4), y + (h / 4) ));
+            southeast.setPosition(sf::Vector2f(x + (w / 4), y + (h / 4) )); 
             SE = new QuadTree(southeast,this->capacity);
 
 
             sf::RectangleShape southwest;
             southwest.setSize(sf::Vector2f(w , h ));
-            southwest.setOrigin(sf::Vector2f(x - (w / 2), y + (h / 2) ));
-            southwest.setPosition(sf::Vector2f(x - (w / 2), y + (h / 2) ));  
+            southwest.setOrigin(sf::Vector2f(x - (w / 4), y + (h / 4) ));
+            southwest.setPosition(sf::Vector2f(x - (w / 4), y + (h / 4) ));  
             SW = new QuadTree(southwest,this->capacity);
 
         }

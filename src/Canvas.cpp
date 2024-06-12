@@ -1,12 +1,13 @@
 #include "Canvas.hpp"
 #include "Utils.hpp"
+#include "Boundary.hpp"
 
 Canvas::Canvas(int width, int height, int numPoints){
     // shape.setSize(sf::Vector2f(width,height));
     // shape.setFillColor(sf::Color::Red);
     // shape.setOrigin(sf::Vector2f(width / 2, height / 2));
     // shape.setPosition(sf::Vector2f(width / 2, height / 2));
-
+    shape = new Boundary(width / 2,height / 2, width, height);
 
     sf::RectangleShape boundaryBox; 
     boundaryBox.setSize(sf::Vector2f(width, height));
@@ -58,6 +59,7 @@ void Canvas::render(){
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].show(window);
     }
-    qtree->show(window);
+    // qtree->show(window);
+    window.draw(shape->getShape());
     window.display();
 }

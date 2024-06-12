@@ -1,3 +1,4 @@
+#include "Boundary.hpp"
 #include "QuadTree.hpp"
 #include "Point.hpp"
 #include <SFML/Graphics.hpp> 
@@ -13,7 +14,7 @@ class Canvas{
     private:
         sf::RenderWindow window; 
         sf::Clock clock;
-        sf::RectangleShape shape;
+        Boundary* shape;
 
         void handleEvents();
         void update(float dt); 

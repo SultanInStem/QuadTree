@@ -7,6 +7,9 @@ class Boundary{
         float x,y,w,h; 
         Boundary(float x, float y, float w, float h);
         ~Boundary();
+        sf::RectangleShape getShape(){
+            return this->shape; 
+        }
     private: 
         sf::RectangleShape shape;        
 };
