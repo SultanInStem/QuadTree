@@ -3,10 +3,6 @@
 #include "Boundary.hpp"
 
 Canvas::Canvas(int width, int height, int numPoints){
-    // shape.setSize(sf::Vector2f(width,height));
-    // shape.setFillColor(sf::Color::Red);
-    // shape.setOrigin(sf::Vector2f(width / 2, height / 2));
-    // shape.setPosition(sf::Vector2f(width / 2, height / 2));
     shape = new Boundary(width / 2,height / 2, width, height);
 
     sf::RectangleShape boundaryBox; 
