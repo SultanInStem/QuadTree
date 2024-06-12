@@ -7,7 +7,7 @@ Canvas::Canvas(int width, int height, int numPoints){
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i] = Point(randomInt(10, width-10), randomInt(10, height-10), 5);
-    }
+    }   
 
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
