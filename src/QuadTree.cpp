@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "include/QuadTree.hpp"
+#include "QuadTree.hpp"
 
 QuadTree::QuadTree(const sf::FloatRect& bounds, int capacity){
     NE = nullptr; 
