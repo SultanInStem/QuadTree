@@ -1,3 +1,4 @@
+#include "QuadTree.hpp"
 #include "Point.hpp"
 #include <SFML/Graphics.hpp> 
 #ifndef CANVAS_HPP 
@@ -12,6 +13,7 @@ class Canvas{
     private:
         sf::RenderWindow window; 
         sf::Clock clock;
+        sf::RectangleShape shape;
 
         void handleEvents();
         void update(float dt); 
@@ -19,6 +21,8 @@ class Canvas{
 
         Point* p_pointsArray;
         int numPoints;
+
+        QuadTree* qtree;
 };
 
 

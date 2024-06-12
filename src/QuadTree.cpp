@@ -7,10 +7,12 @@ QuadTree::QuadTree(const sf::RectangleShape& bounds, int capacity){
     SE = nullptr;
     SW = nullptr;
     boundary = bounds; 
-    boundary.setOrigin(sf::Vector2f(boundary.getSize().x / 2.0f, boundary.getSize().y / 2.0f));
     this->capacity = capacity;
 }
 
 QuadTree::~QuadTree(){
-
+    delete NE;
+    delete NW;
+    delete SE;
+    delete SW; 
 }

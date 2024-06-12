@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp> 
+#include <SFML/Graphics.hpp>
 #ifndef POINT_HPP
 #define POINT_HPP 
 
