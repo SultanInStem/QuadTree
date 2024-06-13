@@ -64,6 +64,7 @@ void Canvas::update(float dt){
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].move();
+        // net.intersects();
         qtree->insert(p_pointsArray[i]);
     }
     

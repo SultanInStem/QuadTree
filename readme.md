@@ -1,2 +1,3 @@
-make the boundary object and figure out how positon rectangles
-based on their center and not left corner
+### TO-DO
+- implement a query functionality 
+- check for collisions 

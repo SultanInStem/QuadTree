@@ -27,6 +27,10 @@ class Boundary{
             y = y1;
             shape.setPosition(sf::Vector2f(x,y));
         }
+        bool intersects(){
+            // hello world
+            return true;
+        }
         
     private: 
         sf::RectangleShape shape;        

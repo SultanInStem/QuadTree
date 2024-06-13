@@ -80,6 +80,7 @@ class QuadTree{
 
         }
         std::vector<Point> query(){
+            
             return points;
         }
 
@@ -102,6 +103,5 @@ class QuadTree{
             }
         }
 };
-
 
 #endif

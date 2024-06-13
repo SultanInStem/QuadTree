@@ -13,6 +13,9 @@ class Point{
             velocity.x = x; 
             velocity.y = y;
         }
+        void setColor(sf::Color color){
+            circle.setFillColor(color);
+        }
         void move(){
             circle.move(velocity.x, velocity.y);
         }
