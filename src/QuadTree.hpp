@@ -62,17 +62,14 @@ class QuadTree{
         }
         bool contains(Point& point){
             return (
-                point.getPos().x > boundary.getPosition().x - (boundary.getSize().x / 2) && 
-                point.getPos().x < boundary.getPosition().x + (boundary.getSize().x / 2) && 
-                point.getPos().y > boundary.getPosition().y - (boundary.getSize().y / 2) &&
-                point.getPos().y < boundary.getPosition().y + (boundary.getSize().y / 2)
+                point.getPos().x > boundary->x - (boundary->x / 2) && 
+                point.getPos().x < boundary->x + (boundary->x / 2) && 
+                point.getPos().y > boundary->y - (boundary->y / 2) &&
+                point.getPos().y < boundary->y + (boundary->y / 2)
             ); 
         }
         void show(sf::RenderWindow& window){
-            boundary.setOutlineThickness(1); 
-            boundary.setOutlineColor(sf::Color::White);  
-            boundary.setFillColor(sf::Color::Transparent);
-            window.draw(boundary);
+            window.draw(boundary->getShape());
             if(isDivided){
                 if(NW != nullptr){
                     NW->show(window);
