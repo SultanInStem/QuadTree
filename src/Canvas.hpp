@@ -14,16 +14,17 @@ class Canvas{
     private:
         sf::RenderWindow window; 
         sf::Clock clock;
-        Boundary* shape;
+        Boundary* shape = nullptr;
+        Boundary* net = nullptr;
 
         void handleEvents();
         void update(float dt); 
         void render();
 
-        Point* p_pointsArray;
+        Point* p_pointsArray = nullptr;
         int numPoints;
 
-        QuadTree* qtree;
+        QuadTree* qtree = nullptr;
 };
 
 

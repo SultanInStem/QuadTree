@@ -22,6 +22,11 @@ class Boundary{
         void setBorderColor(sf::Color color){
             shape.setOutlineColor(color);
         }
+        void setPosition(float x1, float y1){
+            x = x1;
+            y = y1;
+            shape.setPosition(sf::Vector2f(x,y));
+        }
         
     private: 
         sf::RectangleShape shape;        
