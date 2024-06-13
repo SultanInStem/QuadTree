@@ -18,6 +18,7 @@ class QuadTree{
         std::vector<Point> points;
         sf::RectangleShape shape; 
         void clearChildren(QuadTree*& node){
+            // *& means 'give me a reference to a pointer and not a copy'; 
             if (node != nullptr) {
                 // Clear the child node recursively
                 node->clearExceptRoot();

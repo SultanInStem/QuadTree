@@ -19,6 +19,10 @@ class Boundary{
                 point.getPos().y <= y + (h / 2)
             ); 
         }
+        void setBorderColor(sf::Color color){
+            shape.setOutlineColor(color);
+        }
+        
     private: 
         sf::RectangleShape shape;        
 };
