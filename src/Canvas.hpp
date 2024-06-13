@@ -15,7 +15,6 @@ class Canvas{
         sf::RenderWindow window; 
         sf::Clock clock;
         Boundary* shape;
-        Boundary* net;
 
         void handleEvents();
         void update(float dt); 

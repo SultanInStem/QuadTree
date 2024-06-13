@@ -3,10 +3,6 @@
 #include "Boundary.hpp"
 
 Canvas::Canvas(int width, int height, int numPoints){
-
-    // net = new Boundary(width / 2,height / 2, 100, 100);
-    // net->setBorderColor(sf::Color::Green);
-
     shape = new Boundary(width / 2,height / 2, width, height);
 
     qtree = new QuadTree(shape, 4);
@@ -26,11 +22,11 @@ Canvas::Canvas(int width, int height, int numPoints){
 
 Canvas::~Canvas(){
     delete[] p_pointsArray; 
-    delete qtree;
-    delete shape;
-    delete net;
+    if(qtree != nullptr){
+        delete qtree;
+        qtree = nullptr;
+    }
 }
-
 
 void Canvas::run(){
     while (window.isOpen()){
@@ -51,13 +47,12 @@ void Canvas::handleEvents(){
     
 }
 void Canvas::update(float dt){
-    qtree->clearExceptRoot();
+    // if(qtree != nullptr) qtree->clearExceptRoot();
+
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].move();
-        qtree->insert(p_pointsArray[i]);
+        // qtree->insert(p_pointsArray[i]);
     }
-    // float mouseX = sf::Mouse::getPosition().x; 
-    // float mouseY = sf::Mouse::getPosition().y; 
 }
 void Canvas::render(){
     window.clear(sf::Color::Black); 
@@ -65,6 +60,5 @@ void Canvas::render(){
         p_pointsArray[i].show(window);
     }
     if(qtree != nullptr) qtree->show(window);
-    // window.draw(net->getShape());
     window.display();
 }

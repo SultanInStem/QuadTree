@@ -31,7 +31,7 @@ class QuadTree{
     public:
         QuadTree(Boundary* bounds, int capacity); 
         ~QuadTree();
-         void clearExceptRoot() {
+        void clearExceptRoot() {
             clearChildren(NW);
             clearChildren(NE);
             clearChildren(SW);
