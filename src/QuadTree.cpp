@@ -1,12 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "QuadTree.hpp"
+#include "Boundary.hpp"
 
-QuadTree::QuadTree(const sf::RectangleShape& bounds, int capacity){
+QuadTree::QuadTree(Boundary* bounds, int capacity){
     NE = nullptr; 
     NW = nullptr;
     SE = nullptr;
     SW = nullptr;
-    boundary = bounds; 
+    boundary = bounds;
     this->capacity = capacity;
 }
 
@@ -15,4 +16,5 @@ QuadTree::~QuadTree(){
     delete NW;
     delete SE;
     delete SW; 
+    delete boundary;
 }

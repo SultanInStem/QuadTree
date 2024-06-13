@@ -1,3 +1,4 @@
+#include "Boundary.hpp"
 #include "Point.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -9,7 +10,7 @@ class QuadTree{
     private: 
         int capacity;
         bool isDivided = false;
-        sf::RectangleShape boundary; 
+        Boundary* boundary; 
         QuadTree* NE;
         QuadTree* NW;
         QuadTree* SW;
@@ -17,7 +18,7 @@ class QuadTree{
         std::vector<Point> points;
         sf::RectangleShape shape; 
     public:
-        QuadTree(const sf::RectangleShape& bounds, int capacity); 
+        QuadTree(Boundary* bounds, int capacity); 
         ~QuadTree();
 
         bool insert(Point& point){
@@ -39,36 +40,24 @@ class QuadTree{
             return false;
         }
         void subdivide(){
-            float x = boundary.getPosition().x; 
-            float y = boundary.getPosition().y; 
-            float w = boundary.getSize().x / 2; 
-            float h = boundary.getSize().y / 2;
+            float x = boundary->x; 
+            float y = boundary->y;
+            float w = boundary->w; 
+            float h = boundary->h;
             isDivided = true;
-            sf::RectangleShape northeast;
-            northeast.setSize(sf::Vector2f(w, h));
-            northeast.setOrigin(sf::Vector2f(x + (w / 4), y - (h / 4)));
-            northeast.setPosition(sf::Vector2f(x + (w / 4), y - (h / 4) )); 
-            NE = new QuadTree(northeast, this->capacity);
+            Boundary northeast(x + (w /2), y - (h / 2), w / 2, h / 2 );
+            NE = new QuadTree(&northeast, this->capacity);
 
-            sf::RectangleShape northwest;
-            northwest.setSize(sf::Vector2f(w, h));
-            northwest.setOrigin(sf::Vector2f(x - (w / 4), y - (h / 4) ));
-            northwest.setPosition(sf::Vector2f(x - (w / 4), y - (h / 4))); 
-            NW = new QuadTree(northwest,this->capacity);
+            Boundary northwest(x - (w /2), y - (h / 2), w / 2, h / 2 );
+            NW = new QuadTree(&northwest,this->capacity);
 
 
-            sf::RectangleShape southeast;
-            southeast.setSize(sf::Vector2f(w , h ));
-            southeast.setOrigin(sf::Vector2f(x + (w / 4), y + (h / 4) ));
-            southeast.setPosition(sf::Vector2f(x + (w / 4), y + (h / 4) )); 
-            SE = new QuadTree(southeast,this->capacity);
+            Boundary southeast(x + (w/2), y + (h/2), w/2, h/2);
+            SE = new QuadTree(&southeast,this->capacity);
 
 
-            sf::RectangleShape southwest;
-            southwest.setSize(sf::Vector2f(w , h ));
-            southwest.setOrigin(sf::Vector2f(x - (w / 4), y + (h / 4) ));
-            southwest.setPosition(sf::Vector2f(x - (w / 4), y + (h / 4) ));  
-            SW = new QuadTree(southwest,this->capacity);
+            Boundary southwest(x - (w / 2), y + (h / 2), w / 2, h / 2);
+            SW = new QuadTree(&southwest,this->capacity);
 
         }
         bool contains(Point& point){
