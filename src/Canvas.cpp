@@ -11,7 +11,7 @@ Canvas::Canvas(int width, int height, int numPoints){
     p_pointsArray = new Point[numPoints];
 
     for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i] = Point(randomInt(400, width - 200), randomInt(30, height), 3);
+        p_pointsArray[i] = Point(randomInt(40, width - 500), randomInt(30, height - 100), 3);
     }
     for(int j = 0; j < numPoints; j++){
         qtree->insert(p_pointsArray[j]);
@@ -47,12 +47,16 @@ void Canvas::handleEvents(){
     
 }
 void Canvas::update(float dt){
+    // if(qtree != nullptr) delete qtree;
+    for(int i = 0; i < numPoints; i++){
+        p_pointsArray[i].move();
+    }
 }
 void Canvas::render(){
     window.clear(sf::Color::Black); 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].show(window);
     }
-    qtree->show(window);
+    if(qtree != nullptr) qtree->show(window);
     window.display();
 }

@@ -17,10 +17,26 @@ class QuadTree{
         QuadTree* SE; 
         std::vector<Point> points;
         sf::RectangleShape shape; 
+        void deleteNodes(QuadTree* node){
+            if (node == nullptr) {
+                return;
+            }
+            // Recursively delete children nodes
+            deleteNodes(node->NE);
+            deleteNodes(node->NW);
+            deleteNodes(node->SW);
+            deleteNodes(node->SE);
+            // Delete the current node (except the root)
+            if (node != this) {
+                delete node;
+            }
+        }
     public:
         QuadTree(Boundary* bounds, int capacity); 
         ~QuadTree();
-
+        void deleteAllNodes(){
+            deleteNodes(this);
+        }
         bool insert(Point& point){
             // if this quadtree does not contain a point, return 
             if(!boundary->contains(point)) return false;
@@ -55,6 +71,11 @@ class QuadTree{
             SW = new QuadTree(new Boundary(x - (w / 2), y + (h / 2), w, h), this->capacity);
 
         }
+        std::vector<Point> query(){
+            return points;
+        }
+
+        
         void show(sf::RenderWindow& window){
             window.draw(boundary->getShape());
             if(isDivided){

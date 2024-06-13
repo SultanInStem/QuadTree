@@ -22,6 +22,9 @@ class Point{
         sf::Vector2f getPos(){
             return circle.getPosition(); 
         }
+        sf::Vector2f getVelocity(){
+            return velocity;
+        }
         void show(sf::RenderWindow& window){
             window.draw(circle);
         }
