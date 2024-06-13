@@ -11,8 +11,10 @@ Canvas::Canvas(int width, int height, int numPoints){
     p_pointsArray = new Point[numPoints];
 
     for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i] = Point(randomInt(30, width - 50), randomInt(30, height - 50), 5);
-        qtree->insert(p_pointsArray[i]);
+        p_pointsArray[i] = Point(randomInt(400, width - 200), randomInt(30, height), 3);
+    }
+    for(int j = 0; j < numPoints; j++){
+        qtree->insert(p_pointsArray[j]);
     }   
 
     sf::ContextSettings settings;
