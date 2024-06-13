@@ -23,8 +23,8 @@ Canvas::Canvas(int width, int height, int numPoints){
 }
 
 Canvas::~Canvas(){
-    delete[] p_pointsArray; 
-    delete qtree;
+    if(p_pointsArray != nullptr) delete[] p_pointsArray; 
+    if(qtree != nullptr) delete qtree;
 }
 
 
@@ -47,9 +47,10 @@ void Canvas::handleEvents(){
     
 }
 void Canvas::update(float dt){
-    // if(qtree != nullptr) delete qtree;
+    qtree->clearExceptRoot();
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].move();
+        qtree->insert(p_pointsArray[i]);
     }
 }
 void Canvas::render(){

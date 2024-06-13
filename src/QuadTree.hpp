@@ -17,31 +17,38 @@ class QuadTree{
         QuadTree* SE; 
         std::vector<Point> points;
         sf::RectangleShape shape; 
-        void deleteNodes(QuadTree* node){
-            if (node == nullptr) {
-                return;
-            }
-            // Recursively delete children nodes
-            deleteNodes(node->NE);
-            deleteNodes(node->NW);
-            deleteNodes(node->SW);
-            deleteNodes(node->SE);
-            // Delete the current node (except the root)
-            if (node != this) {
+        void clearChildren(QuadTree*& node){
+            if (node != nullptr) {
+                // Clear the child node recursively
+                node->clearExceptRoot();
+                // Delete the child node
                 delete node;
+                // Set the pointer to null
+                node = nullptr;
             }
         }
     public:
         QuadTree(Boundary* bounds, int capacity); 
         ~QuadTree();
-        void deleteAllNodes(){
-            deleteNodes(this);
+         void clearExceptRoot() {
+            clearChildren(NW);
+            clearChildren(NE);
+            clearChildren(SW);
+            clearChildren(SE);
+
+            // Clear the points vector
+            points.clear();
+
+            // Reset the isDivided flag
+            isDivided = false;
         }
+
+
         bool insert(Point& point){
             // if this quadtree does not contain a point, return 
             if(!boundary->contains(point)) return false;
 
-            if(points.size() < capacity - 1){
+            if(points.size() < capacity){
                 points.push_back(point);
                 return true; 
             }else{
