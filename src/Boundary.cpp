@@ -5,10 +5,13 @@ Boundary::Boundary(float x, float y, float w, float h){
     this->y = y; 
     this->w = w;
     this->h = h;
-    shape.setSize(sf::Vector2f(w,h));
+    shape.setSize(sf::Vector2f(w, h));
     shape.setOrigin(sf::Vector2f(w / 2, h / 2));
     shape.setPosition(sf::Vector2f(x,y));
-    shape.setFillColor(sf::Color::Red);
+
+    shape.setOutlineColor(sf::Color::White); 
+    shape.setOutlineThickness(1);
+    shape.setFillColor(sf::Color::Transparent);
 }
 
 Boundary::~Boundary(){

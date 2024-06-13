@@ -1,3 +1,4 @@
+#include "Point.hpp"
 #include <SFML/Graphics.hpp>
 #ifndef BOUNDARY_HPP 
 #define BOUNDARY_HPP
@@ -9,6 +10,14 @@ class Boundary{
         ~Boundary();
         sf::RectangleShape getShape(){
             return this->shape; 
+        }
+        bool contains(Point& point){
+            return (
+                point.getPos().x >= x - (w / 2) && 
+                point.getPos().x <= x + (w / 2) && 
+                point.getPos().y >= y - (h / 2) &&
+                point.getPos().y <= y + (h / 2)
+            ); 
         }
     private: 
         sf::RectangleShape shape;        

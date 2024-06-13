@@ -23,7 +23,7 @@ class QuadTree{
 
         bool insert(Point& point){
             // if this quadtree does not contain a point, return 
-            if(!contains(point)) return false; 
+            if(!boundary->contains(point)) return false;
 
             if(points.size() < capacity){
                 points.push_back(point);
@@ -45,28 +45,15 @@ class QuadTree{
             float w = boundary->w; 
             float h = boundary->h;
             isDivided = true;
-            Boundary northeast(x + (w /2), y - (h / 2), w / 2, h / 2 );
-            NE = new QuadTree(&northeast, this->capacity);
 
-            Boundary northwest(x - (w /2), y - (h / 2), w / 2, h / 2 );
-            NW = new QuadTree(&northwest,this->capacity);
+            NE = new QuadTree(new Boundary(x + (w / 4), y - (h / 4), w / 2, h / 2), 4);
 
+            NW = new QuadTree(new Boundary(x - (w / 4), y - (h / 4), w / 2, h / 2 ),4);
 
-            Boundary southeast(x + (w/2), y + (h/2), w/2, h/2);
-            SE = new QuadTree(&southeast,this->capacity);
+            SE = new QuadTree(new Boundary(x + (w / 4), y + (h / 4), w / 2, h / 2),4);
 
+            SW = new QuadTree(new Boundary(x - (w / 4), y + (h / 4), w / 2, h / 2), 4);
 
-            Boundary southwest(x - (w / 2), y + (h / 2), w / 2, h / 2);
-            SW = new QuadTree(&southwest,this->capacity);
-
-        }
-        bool contains(Point& point){
-            return (
-                point.getPos().x > boundary->x - (boundary->x / 2) && 
-                point.getPos().x < boundary->x + (boundary->x / 2) && 
-                point.getPos().y > boundary->y - (boundary->y / 2) &&
-                point.getPos().y < boundary->y + (boundary->y / 2)
-            ); 
         }
         void show(sf::RenderWindow& window){
             window.draw(boundary->getShape());

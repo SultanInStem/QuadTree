@@ -5,17 +5,13 @@
 Canvas::Canvas(int width, int height, int numPoints){
     shape = new Boundary(width / 2,height / 2, width, height);
 
-    sf::RectangleShape boundaryBox; 
-    boundaryBox.setSize(sf::Vector2f(width, height));
-    boundaryBox.setOrigin(sf::Vector2f(width / 2.0f, height / 2.0f));
-    boundaryBox.setPosition(sf::Vector2f(width / 2.0f, height / 2.0f));
-    qtree = new QuadTree(boundaryBox, 4);
+    qtree = new QuadTree(shape, 4);
 
     this->numPoints = numPoints; 
     p_pointsArray = new Point[numPoints];
 
     for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i] = Point(randomInt(10, width-10), randomInt(10, height-10), 5);
+        p_pointsArray[i] = Point(randomInt(30, width - 50), randomInt(30, height - 50), 5);
         qtree->insert(p_pointsArray[i]);
     }   
 
@@ -55,7 +51,6 @@ void Canvas::render(){
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].show(window);
     }
-    // qtree->show(window);
-    window.draw(shape->getShape());
+    qtree->show(window);
     window.display();
 }
