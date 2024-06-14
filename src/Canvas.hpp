@@ -17,6 +17,7 @@ class Canvas{
         Boundary* shape = nullptr;
         Boundary* queryRegion = nullptr;
         std::vector<Point*> foundPoints;
+        std::vector<Point*> myPoints;
 
         void handleEvents();
         void update(float dt); 
@@ -26,8 +27,6 @@ class Canvas{
         int frameCount =  0; 
         float fpsTime  =  0;
 
-        Point* pointsArray = nullptr;
-        int numPoints;
 
         QuadTree* qtree = nullptr;
 };
