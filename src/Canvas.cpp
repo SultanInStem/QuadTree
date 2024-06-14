@@ -16,6 +16,7 @@ Canvas::Canvas(int width, int height, int numPoints){
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i] = Point(randomInt(40, width - 500), randomInt(30, height - 100), 3);
+        p_pointsArray[i].setVelocity(1, 0.5);
     }
     for(int i = 0; i < numPoints; i++){
         qtree->insert(&p_pointsArray[i]);
@@ -36,8 +37,10 @@ Canvas::~Canvas(){
         delete qtree;
         qtree = nullptr; 
     }
-    delete queryRegion;
-    queryRegion = nullptr;
+    if(queryRegion != nullptr){
+        delete queryRegion;
+        queryRegion = nullptr;
+    }
     for(int i = 0; i < foundPoints.size(); i++){
         delete foundPoints[i];
     }
@@ -58,9 +61,9 @@ void Canvas::handleEvents(){
         if(event.type == sf::Event::Closed){
             window.close(); 
         }else if(event.type == sf::Event::MouseMoved){
-            float mouseX = sf::Mouse::getPosition(window).x;
-            float mouseY = sf::Mouse::getPosition(window).y;
-            queryRegion->setPosition(mouseX,mouseY);
+            // float mouseX = sf::Mouse::getPosition(window).x;
+            // float mouseY = sf::Mouse::getPosition(window).y;
+            // queryRegion->setPosition(mouseX,mouseY);
         }
     }
     
@@ -71,7 +74,7 @@ void Canvas::update(float dt){
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].setColor(sf::Color::White);
-        p_pointsArray[i].move();
+        p_pointsArray[i].move(window.getSize().x, window.getSize().y);
         qtree->insert(&p_pointsArray[i]);
     }
     foundPoints.clear(); 
@@ -86,7 +89,7 @@ void Canvas::render(){
         p_pointsArray[i].show(window);
     }
     if(qtree != nullptr) qtree->show(window);
-    window.draw(queryRegion->getShape());
+    // window.draw(queryRegion->getShape());
     window.display();
 }
 void Canvas::logFPS(float dt){
