@@ -79,8 +79,17 @@ class QuadTree{
             SW = new QuadTree(new Boundary(x - (w / 2), y + (h / 2), w, h), this->capacity);
 
         }
-        std::vector<Point> query(){
-            
+        std::vector<Point> query(Boundary*& region, std::vector<Point>& foundPoints){
+            // std::vector<Point> foundPoints;
+            // if(!region.intersects(this)){
+            // return []; 
+            // }
+            // foundPoints.push(points);
+            // if(isDivided){
+            // NW.query(region, foundpoints);
+            // SW.query(region,foundPints);
+            // }
+            //.....
             return points;
         }
 
