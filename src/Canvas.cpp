@@ -5,6 +5,7 @@ using std::cout;
 
 
 Canvas::Canvas(int width, int height, int numPoints){
+    
     queryRegion = new Boundary(width / 2, height / 2, 100, 100);
     queryRegion->setBorderColor(sf::Color::Green);
     shape = new Boundary(width / 2,height / 2, width, height);
@@ -12,14 +13,14 @@ Canvas::Canvas(int width, int height, int numPoints){
     qtree = new QuadTree(shape, 4);
 
     this->numPoints = numPoints; 
-    p_pointsArray = new Point[numPoints];
+    pointsArray = new Point[numPoints];
 
     for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i] = Point(randomInt(40, width - 500), randomInt(30, height - 100), 3);
-        p_pointsArray[i].setVelocity(1, 0.5);
+        pointsArray[i] = Point(randomInt(40, width - 500), randomInt(30, height - 100), 3);
+        pointsArray[i].setVelocity(1, 0.5);
     }
     for(int i = 0; i < numPoints; i++){
-        qtree->insert(&p_pointsArray[i]);
+        qtree->insert(&pointsArray[i]);
     }
 
     sf::ContextSettings settings;
@@ -29,9 +30,9 @@ Canvas::Canvas(int width, int height, int numPoints){
 }
 
 Canvas::~Canvas(){
-    if(p_pointsArray != nullptr){
-        delete[] p_pointsArray; 
-        p_pointsArray = nullptr; 
+    if(pointsArray != nullptr){
+        delete[] pointsArray; 
+        pointsArray = nullptr; 
     }
     if(qtree != nullptr){
         delete qtree;
@@ -49,6 +50,7 @@ Canvas::~Canvas(){
 void Canvas::run(){
     while (window.isOpen()){
         float dt = clock.restart().asSeconds();
+        window.clear(sf::Color::Black);
         logFPS(dt);
         handleEvents(); 
         update(dt); 
@@ -72,25 +74,17 @@ void Canvas::handleEvents(){
 }
 void Canvas::update(float dt){
     if(qtree != nullptr) qtree->clearExceptRoot();
+    foundPoints.clear();
 
     for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i].setColor(sf::Color::White);
-        p_pointsArray[i].move(window.getSize().x, window.getSize().y, dt);
-        qtree->insert(&p_pointsArray[i]);
+        pointsArray[i].setColor(sf::Color::White);
+        pointsArray[i].move(window.getSize().x, window.getSize().y, dt);
+        pointsArray[i].show(window);
+        qtree->insert(&pointsArray[i]);
     }
-
-
-    // foundPoints.clear(); 
-    // qtree->query(queryRegion, foundPoints);
-    // for(auto point : foundPoints){
-    //     point->setColor(sf::Color::Green);
-    // }
 }
 void Canvas::render(){
-    window.clear(sf::Color::Black); 
-    for(int i = 0; i < numPoints; i++){
-        p_pointsArray[i].show(window);
-    }
+
     if(qtree != nullptr) qtree->show(window);
     // window.draw(queryRegion->getShape());
     window.display();

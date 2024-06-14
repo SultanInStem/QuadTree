@@ -97,7 +97,9 @@ class QuadTree{
             return foundPoints;
         }
 
-        
+        int getPointsSize(){
+            return points.size();
+        }        
         void show(sf::RenderWindow& window){
             window.draw(boundary->getShape());
             if(isDivided){

@@ -18,12 +18,13 @@ class Point{
         }
         void move(const int& windowWidth, const int& windowHeight, const float& dt){
             float x = getPos().x; 
-            float y = getPos().y; 
+            float y = getPos().y;
+             
             if(x + velocity.x > windowWidth || x + velocity.x < 0){
-                velocity.x = -1 * velocity.x * dt; 
+                velocity.x = -1 * (velocity.x); 
             }
             if(y + velocity.y > windowHeight || y + velocity.y < 0){
-                velocity.y = -1 * velocity.y * dt;
+                velocity.y = -1 * (velocity.y);
             }
             circle.move(velocity.x, velocity.y);
         }

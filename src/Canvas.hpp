@@ -26,7 +26,7 @@ class Canvas{
         int frameCount =  0; 
         float fpsTime  =  0;
 
-        Point* p_pointsArray = nullptr;
+        Point* pointsArray = nullptr;
         int numPoints;
 
         QuadTree* qtree = nullptr;

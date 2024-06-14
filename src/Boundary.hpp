@@ -18,6 +18,11 @@ class Boundary{
                 point->getPos().y >= y - (h / 2) &&
                 point->getPos().y <= y + (h / 2)
             ); 
+        } 
+        void setSize(float width, float height){
+            w = width;
+            h = height; 
+            shape.setSize(sf::Vector2f(w,h));
         }
         void setBorderColor(sf::Color color){
             shape.setOutlineColor(color);
