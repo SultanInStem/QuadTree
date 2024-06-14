@@ -5,11 +5,8 @@ using std::cout;
 
 
 Canvas::Canvas(int width, int height, int numPoints){
-    fpsTime = 0;
-    frameCount = 0;
-
-    net = new Boundary(width / 2, height / 2, 100, 100);
-    net->setBorderColor(sf::Color::Green);
+    queryRegion = new Boundary(width / 2, height / 2, 100, 100);
+    queryRegion->setBorderColor(sf::Color::Green);
     shape = new Boundary(width / 2,height / 2, width, height);
 
     qtree = new QuadTree(shape, 4);
@@ -39,8 +36,8 @@ Canvas::~Canvas(){
         delete qtree;
         qtree = nullptr; 
     }
-    delete net;
-    net = nullptr;
+    delete queryRegion;
+    queryRegion = nullptr;
     for(int i = 0; i < foundPoints.size(); i++){
         delete foundPoints[i];
     }
@@ -63,7 +60,7 @@ void Canvas::handleEvents(){
         }else if(event.type == sf::Event::MouseMoved){
             float mouseX = sf::Mouse::getPosition(window).x;
             float mouseY = sf::Mouse::getPosition(window).y;
-            net->setPosition(mouseX,mouseY);
+            queryRegion->setPosition(mouseX,mouseY);
         }
     }
     
@@ -78,7 +75,7 @@ void Canvas::update(float dt){
         qtree->insert(&p_pointsArray[i]);
     }
     foundPoints.clear(); 
-    qtree->query(net, foundPoints);
+    qtree->query(queryRegion, foundPoints);
     for(auto point : foundPoints){
         point->setColor(sf::Color::Green);
     }
@@ -89,7 +86,7 @@ void Canvas::render(){
         p_pointsArray[i].show(window);
     }
     if(qtree != nullptr) qtree->show(window);
-    window.draw(net->getShape());
+    window.draw(queryRegion->getShape());
     window.display();
 }
 void Canvas::logFPS(float dt){

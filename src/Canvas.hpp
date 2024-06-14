@@ -15,7 +15,7 @@ class Canvas{
         sf::RenderWindow window; 
         sf::Clock clock;
         Boundary* shape = nullptr;
-        Boundary* net = nullptr;
+        Boundary* queryRegion = nullptr;
         std::vector<Point*> foundPoints;
 
         void handleEvents();
@@ -23,8 +23,8 @@ class Canvas{
         void render();
 
         void logFPS(float dt);
-        int frameCount; 
-        float fpsTime;
+        int frameCount =  0; 
+        float fpsTime  =  0;
 
         Point* p_pointsArray = nullptr;
         int numPoints;
