@@ -16,6 +16,7 @@ class Canvas{
         sf::Clock clock;
         Boundary* shape = nullptr;
         Boundary* net = nullptr;
+        std::vector<Point> foundPoints;
 
         void handleEvents();
         void update(float dt); 

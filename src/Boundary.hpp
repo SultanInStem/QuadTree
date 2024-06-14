@@ -27,8 +27,13 @@ class Boundary{
             y = y1;
             shape.setPosition(sf::Vector2f(x,y));
         }
-        bool intersects(QuadTree*& qtree){
-            // return qtree->boundary->x > 1;
+        bool intersects(Boundary*& treeRegion){
+            return!(
+                x + (w / 2) < treeRegion->x - (treeRegion->w / 2) ||    
+                x - (w / 2) > treeRegion->x + (treeRegion->w / 2) || 
+                y - (h / 2)  > treeRegion->y + (treeRegion->h / 2)|| 
+                y + (h / 2) < treeRegion->y - (treeRegion->h / 2)
+            );
         }
         
     private: 

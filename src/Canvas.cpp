@@ -1,6 +1,7 @@
 #include "Canvas.hpp"
 #include "Utils.hpp"
 #include "Boundary.hpp"
+using std::cout; 
 
 Canvas::Canvas(int width, int height, int numPoints){
     net = new Boundary(width / 2, height / 2, 100, 100);
@@ -64,10 +65,11 @@ void Canvas::update(float dt){
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].move();
-        // net.intersects();
         qtree->insert(p_pointsArray[i]);
     }
-    
+    foundPoints.clear(); 
+    qtree->query(net, foundPoints);
+    cout << foundPoints.size()<< "\n";
 }
 void Canvas::render(){
     window.clear(sf::Color::Black); 
