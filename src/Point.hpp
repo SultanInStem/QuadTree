@@ -27,8 +27,14 @@ class Point{
             }
             circle.move(velocity.x, velocity.y);
         }
-        void randomMotion(){
-            
+        void randomMove(){
+
+        }
+        bool isCollided(Point* point){
+            float r = getRadius(); 
+            float distX = (point->getPos().x - getPos().x) * (point->getPos().x - getPos().x);
+            float distY = (point->getPos().y - getPos().y) * (point->getPos().y - getPos().y); 
+            return(distX + distY < r * r);
         }
         float getRadius(){
             return circle.getRadius(); 
