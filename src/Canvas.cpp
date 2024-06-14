@@ -3,7 +3,11 @@
 #include "Boundary.hpp"
 using std::cout; 
 
+
 Canvas::Canvas(int width, int height, int numPoints){
+    fpsTime = 0;
+    frameCount = 0;
+
     net = new Boundary(width / 2, height / 2, 100, 100);
     net->setBorderColor(sf::Color::Green);
     shape = new Boundary(width / 2,height / 2, width, height);
@@ -23,6 +27,7 @@ Canvas::Canvas(int width, int height, int numPoints){
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     window.create(sf::VideoMode(width, height), "Title", sf::Style::Titlebar | sf::Style::Close, settings);
+    window.setFramerateLimit(90);
 }
 
 Canvas::~Canvas(){
@@ -64,6 +69,7 @@ void Canvas::handleEvents(){
     
 }
 void Canvas::update(float dt){
+    logFPS(dt);
     if(qtree != nullptr) qtree->clearExceptRoot();
 
     for(int i = 0; i < numPoints; i++){
@@ -85,4 +91,14 @@ void Canvas::render(){
     if(qtree != nullptr) qtree->show(window);
     window.draw(net->getShape());
     window.display();
+}
+void Canvas::logFPS(float dt){
+    if(fpsTime < 1.0f){
+        fpsTime += dt;
+        frameCount++; 
+    }else{
+        cout << "FPS: " << frameCount << "\n";
+        fpsTime = 0; 
+        frameCount = 0;
+    }
 }

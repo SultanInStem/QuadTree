@@ -22,6 +22,10 @@ class Canvas{
         void update(float dt); 
         void render();
 
+        void logFPS(float dt);
+        int frameCount; 
+        float fpsTime;
+
         Point* p_pointsArray = nullptr;
         int numPoints;
 
