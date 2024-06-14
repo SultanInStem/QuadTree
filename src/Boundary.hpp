@@ -11,12 +11,12 @@ class Boundary{
         sf::RectangleShape getShape(){
             return this->shape; 
         }
-        bool contains(Point& point){
+        bool contains(Point* point){
             return (
-                point.getPos().x >= x - (w / 2) && 
-                point.getPos().x <= x + (w / 2) && 
-                point.getPos().y >= y - (h / 2) &&
-                point.getPos().y <= y + (h / 2)
+                point->getPos().x >= x - (w / 2) && 
+                point->getPos().x <= x + (w / 2) && 
+                point->getPos().y >= y - (h / 2) &&
+                point->getPos().y <= y + (h / 2)
             ); 
         }
         void setBorderColor(sf::Color color){

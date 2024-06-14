@@ -15,7 +15,7 @@ class QuadTree{
         QuadTree* NW;
         QuadTree* SW;
         QuadTree* SE; 
-        std::vector<Point> points;
+        std::vector<Point*> points;
         sf::RectangleShape shape; 
         void clearChildren(QuadTree*& node){
             // *& means 'give me a reference to a pointer and not a copy'; 
@@ -45,7 +45,7 @@ class QuadTree{
         }
 
 
-        bool insert(Point& point){
+        bool insert(Point* point){
             // if this quadtree does not contain a point, return 
             if(!boundary->contains(point)) return false;
 
@@ -79,9 +79,9 @@ class QuadTree{
             SW = new QuadTree(new Boundary(x - (w / 2), y + (h / 2), w, h), this->capacity);
 
         }
-        std::vector<Point> query(Boundary*& region, std::vector<Point>& foundPoints){
+        std::vector<Point*> query(Boundary*& region, std::vector<Point*>& foundPoints){
             if(!region->intersects(boundary)){
-                return foundPoints;
+                return (foundPoints);
             }
             for(int i = 0; i < points.size(); i++){
                 if(region->contains(points[i])){

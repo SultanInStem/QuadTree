@@ -17,7 +17,7 @@ Canvas::Canvas(int width, int height, int numPoints){
         p_pointsArray[i] = Point(randomInt(40, width - 500), randomInt(30, height - 100), 3);
     }
     for(int i = 0; i < numPoints; i++){
-        qtree->insert(p_pointsArray[i]);
+        qtree->insert(&p_pointsArray[i]);
     }
 
     sf::ContextSettings settings;
@@ -36,6 +36,9 @@ Canvas::~Canvas(){
     }
     delete net;
     net = nullptr;
+    for(int i = 0; i < foundPoints.size(); i++){
+        delete foundPoints[i];
+    }
 }
 
 void Canvas::run(){
@@ -64,12 +67,15 @@ void Canvas::update(float dt){
     if(qtree != nullptr) qtree->clearExceptRoot();
 
     for(int i = 0; i < numPoints; i++){
+        p_pointsArray[i].setColor(sf::Color::White);
         p_pointsArray[i].move();
-        qtree->insert(p_pointsArray[i]);
+        qtree->insert(&p_pointsArray[i]);
     }
     foundPoints.clear(); 
     qtree->query(net, foundPoints);
-    cout << foundPoints.size()<< "\n";
+    for(auto point : foundPoints){
+        point->setColor(sf::Color::Green);
+    }
 }
 void Canvas::render(){
     window.clear(sf::Color::Black); 
