@@ -16,16 +16,19 @@ class Point{
         void setColor(sf::Color color){
             circle.setFillColor(color);
         }
-        void move(int windowWidth, int windowHeight){
+        void move(const int& windowWidth, const int& windowHeight, const float& dt){
             float x = getPos().x; 
             float y = getPos().y; 
             if(x + velocity.x > windowWidth || x + velocity.x < 0){
-                velocity.x = -1 * velocity.x; 
+                velocity.x = -1 * velocity.x * dt; 
             }
             if(y + velocity.y > windowHeight || y + velocity.y < 0){
-                velocity.y = -1 * velocity.y;
+                velocity.y = -1 * velocity.y * dt;
             }
             circle.move(velocity.x, velocity.y);
+        }
+        void randomMotion(){
+            
         }
         float getRadius(){
             return circle.getRadius(); 

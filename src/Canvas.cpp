@@ -49,6 +49,7 @@ Canvas::~Canvas(){
 void Canvas::run(){
     while (window.isOpen()){
         float dt = clock.restart().asSeconds();
+        logFPS(dt);
         handleEvents(); 
         update(dt); 
         render();
@@ -60,28 +61,30 @@ void Canvas::handleEvents(){
     while (window.pollEvent(event)){
         if(event.type == sf::Event::Closed){
             window.close(); 
-        }else if(event.type == sf::Event::MouseMoved){
-            // float mouseX = sf::Mouse::getPosition(window).x;
-            // float mouseY = sf::Mouse::getPosition(window).y;
-            // queryRegion->setPosition(mouseX,mouseY);
         }
+        // else if(event.type == sf::Event::MouseMoved){
+        //     // float mouseX = sf::Mouse::getPosition(window).x;
+        //     // float mouseY = sf::Mouse::getPosition(window).y;
+        //     // queryRegion->setPosition(mouseX,mouseY);
+        // }
     }
     
 }
 void Canvas::update(float dt){
-    logFPS(dt);
     if(qtree != nullptr) qtree->clearExceptRoot();
 
     for(int i = 0; i < numPoints; i++){
         p_pointsArray[i].setColor(sf::Color::White);
-        p_pointsArray[i].move(window.getSize().x, window.getSize().y);
+        p_pointsArray[i].move(window.getSize().x, window.getSize().y, dt);
         qtree->insert(&p_pointsArray[i]);
     }
-    foundPoints.clear(); 
-    qtree->query(queryRegion, foundPoints);
-    for(auto point : foundPoints){
-        point->setColor(sf::Color::Green);
-    }
+
+
+    // foundPoints.clear(); 
+    // qtree->query(queryRegion, foundPoints);
+    // for(auto point : foundPoints){
+    //     point->setColor(sf::Color::Green);
+    // }
 }
 void Canvas::render(){
     window.clear(sf::Color::Black); 
