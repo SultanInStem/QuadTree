@@ -15,7 +15,7 @@ Canvas::Canvas(int width, int height, int numPoints){
 
     for(int i = 0; i < numPoints; i++){
         myPoints.push_back(new Point(randomInt(40, width - 500), randomInt(30, height - 100), 3));
-        myPoints[i]->setVelocity(1,0.5);
+        myPoints[i]->setVelocity(0.1,0.1);
     }
     for(int i = 0; i < numPoints; i++){
         qtree->insert(myPoints[i]);
@@ -74,10 +74,24 @@ void Canvas::update(float dt){
     foundPoints.clear();
 
     for(int i = 0; i < myPoints.size(); i++){
-        myPoints[i]->setColor(sf::Color::White);
         myPoints[i]->move(window.getSize().x, window.getSize().y, dt);
         myPoints[i]->show(window);
+        myPoints[i]->setColor(sf::Color::White);
         qtree->insert(myPoints[i]);
+    }
+
+    for(int i = 0; i < myPoints.size(); i++){
+        float r = myPoints[i]->getRadius(); 
+        queryRegion->setPosition(myPoints[i]->getPos().x,  myPoints[i]->getPos().y);
+        queryRegion->setSize(r + 20, r + 20);
+        foundPoints.clear(); 
+        qtree->query(queryRegion, foundPoints);
+        for(int j = 0; j < foundPoints.size(); j++){
+            if(myPoints[i] != foundPoints[j] && myPoints[i]->isCollided(foundPoints[j])){
+                myPoints[i]->setColor(sf::Color::Red);
+                foundPoints[j]->setColor(sf::Color::Red);
+            }
+        }
     }
 }
 void Canvas::render(){
