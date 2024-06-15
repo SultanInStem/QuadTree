@@ -1,5 +1,5 @@
 #include "Canvas.hpp"
-// #include "Utils.hpp"
+#include "Utils.hpp"
 #include "Boundary.hpp"
 using std::cout; 
 
@@ -33,9 +33,6 @@ Canvas::~Canvas(){
         delete queryRegion;
         queryRegion = nullptr;
     }
-    for(int i = 0; i < foundPoints.size(); i++){
-        delete foundPoints[i];
-    }
     for(int i = 0; i < myPoints.size();i++){
         delete myPoints[i];
     }
@@ -48,6 +45,7 @@ void Canvas::run(){
         logFPS(dt);
         handleEvents(); 
         update(dt); 
+        // primitiveUpdate(dt);
         render();
     }
 }
@@ -71,25 +69,35 @@ void Canvas::update(float dt){
 
     for(int i = 0; i < myPoints.size(); i++){
         float r = myPoints[i]->getRadius(); 
+        foundPoints.clear(); 
         myPoints[i]->randomMove(window.getSize().x, window.getSize().y);
         queryRegion->setPosition(myPoints[i]->getPos().x,  myPoints[i]->getPos().y);
         queryRegion->setSize(r + 40, r + 40);
-        foundPoints.clear(); 
         qtree->query(queryRegion, foundPoints);
-        for(int j = 0; j < foundPoints.size(); j++){
-            foundPoints[j]->randomMove(window.getSize().x, window.getSize().y);
+        for(int j = 0; j < foundPoints.size(); j++){                
             if(myPoints[i] != foundPoints[j] && myPoints[i]->isCollided(foundPoints[j])){
                 myPoints[i]->setColor(sf::Color::Red);
                 foundPoints[j]->setColor(sf::Color::Red);
             }
-            foundPoints[j]->show(window);
         }
         myPoints[i]->show(window); 
     }
 }
+void Canvas::primitiveUpdate(float dt){
+    for(int i = 0; i < myPoints.size(); i++){
+        myPoints[i]->setColor(sf::Color::White);
+        myPoints[i]->randomMove(window.getSize().x, window.getSize().y);
+        for(int j = 0; j < myPoints.size(); j++){
+            if(myPoints[i] != myPoints[j] && myPoints[i]->isCollided(myPoints[j])){
+                myPoints[i]->setColor(sf::Color::Red);
+                myPoints[j]->setColor(sf::Color::Red);
+            }
+        }
+        myPoints[i]->show(window);
+    }
+}
 void Canvas::render(){
     if(qtree != nullptr) qtree->show(window);
-    // window.draw(queryRegion->getShape());
     window.display();
 }
 void Canvas::logFPS(float dt){

@@ -12,16 +12,6 @@ class Canvas{
         ~Canvas();
 
         void run(); 
-        // float randomFloat(float min,float max){
-        //     std::random_device rd; 
-        //     std::mt19937 gen(rd());
-        //     std::normal_distribution<float> distribution(min, max);
-        //     float randomFloat = distribution(gen);
-        //     return randomFloat;
-        // }
-        // int randomInt(int min, int max){
-        //     return (rand() % (max - min)) + min;
-        // }
     private:
         sf::RenderWindow window; 
         sf::Clock clock;
@@ -32,6 +22,7 @@ class Canvas{
 
         void handleEvents();
         void update(float dt); 
+        void primitiveUpdate(float dt);
         void render();
 
         void logFPS(float dt);
