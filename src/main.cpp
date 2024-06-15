@@ -7,7 +7,7 @@ using std::cout;
 int main(){
     srand(time(0));
 
-    Canvas canvas(1100,750, 2000);
+    Canvas canvas(1100,750, 1500);
     canvas.run(); 
     
     return 0; 

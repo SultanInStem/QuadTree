@@ -15,6 +15,9 @@ class Canvas{
     private:
         sf::RenderWindow window; 
         sf::Clock clock;
+        sf::Font font;
+        sf::Text fpsText;
+        
         Boundary* shape = nullptr;
         Boundary* queryRegion = nullptr;
         std::vector<Point*> foundPoints;

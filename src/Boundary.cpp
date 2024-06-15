@@ -10,7 +10,7 @@ Boundary::Boundary(float x, float y, float w, float h){
     shape.setPosition(sf::Vector2f(x,y));
 
     shape.setOutlineColor(sf::Color::White); 
-    shape.setOutlineThickness(1);
+    shape.setOutlineThickness(0.3);
     shape.setFillColor(sf::Color::Transparent);
 }
 

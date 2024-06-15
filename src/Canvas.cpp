@@ -1,16 +1,17 @@
 #include "Canvas.hpp"
 #include "Utils.hpp"
 #include "Boundary.hpp"
+#include <SFML/Graphics.hpp>
 using std::cout; 
 
 
 Canvas::Canvas(int width, int height, int numPoints){
     
     queryRegion = new Boundary(width / 2, height / 2, 100, 100);
-    queryRegion->setBorderColor(sf::Color::Green);
     shape = new Boundary(width / 2,height / 2, width, height);
-
     qtree = new QuadTree(shape, 4);
+
+
 
 
     for(int i = 0; i < numPoints; i++){
@@ -18,10 +19,22 @@ Canvas::Canvas(int width, int height, int numPoints){
         myPoints[i]->setVelocity(0.1,0.1);
         qtree->insert(myPoints[i]);
     }
+
+    // if(!font.loadFromFile("assets/OpenSans-Medium.ttf")){
+    //     cout << "Font is failed to load \n"; 
+    //     exit(1);
+    // }
+    // fpsText.setFont(font);
+    // fpsText.setCharacterSize(40);
+    // fpsText.setString("FPS Without QT: _");
+    // fpsText.setPosition(sf::Vector2f(0,0));
+    // fpsText.setFillColor(sf::Color::Green);
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     window.create(sf::VideoMode(width, height), "QuadTree Collisions", sf::Style::Titlebar | sf::Style::Close, settings);
     window.setFramerateLimit(90);
+
 }
 
 Canvas::~Canvas(){
@@ -62,6 +75,7 @@ void Canvas::handleEvents(){
 void Canvas::update(float dt){
     if(qtree != nullptr) qtree->clearExceptRoot();
     foundPoints.clear();
+
     for(int i = 0; i < myPoints.size(); i++){
         myPoints[i]->setColor(sf::Color::White);
         qtree->insert(myPoints[i]);
@@ -105,6 +119,11 @@ void Canvas::logFPS(float dt){
         fpsTime += dt;
         frameCount++; 
     }else{
+        // std::string s = "FPS With QT: "; 
+        // s.append(std::to_string(frameCount));
+        // s.append("  N-of Points: ");
+        // s.append(std::to_string(myPoints.size()));
+        // fpsText.setString(s);
         cout << "FPS: " << frameCount << "\n";
         fpsTime = 0; 
         frameCount = 0;
