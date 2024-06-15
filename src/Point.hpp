@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Utils.hpp"
 #ifndef POINT_HPP
 #define POINT_HPP 
 
@@ -19,7 +20,6 @@ class Point{
         void move(const int& windowWidth, const int& windowHeight, const float& dt){
             float x = getPos().x; 
             float y = getPos().y;
-             
             if(x + velocity.x > windowWidth || x + velocity.x < 0){
                 velocity.x = -1 * (velocity.x); 
             }
@@ -28,8 +28,18 @@ class Point{
             }
             circle.move(velocity.x, velocity.y);
         }
-        void randomMove(){
-
+        void randomMove(const int& windowWidth, const int& windowHeight){
+            float x = getPos().x; 
+            float y = getPos().y;
+            velocity.x = randomFloat(0,1); 
+            velocity.y = randomFloat(0,1);
+            if(x + velocity.x > windowWidth || x + velocity.x < 0){
+                velocity.x = -1 * (velocity.x); 
+            }
+            if(y + velocity.y > windowHeight || y + velocity.y < 0){
+                velocity.y = -1 * (velocity.y);
+            }
+            circle.move(velocity.x, velocity.y);
         }
         bool isCollided(Point* point){
             float r = getRadius(); 
