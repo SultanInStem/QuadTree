@@ -3,7 +3,7 @@
 ## Demo 
 ![](https://github.com/rick-n-shawty/QuadTree/blob/main/QuadTreeVid.gif)
 #
-Performance demo can be viewed![here: ](https://youtu.be/pj_C5bQpkV4)
+Performance demo can be viewed [here: ](https://youtu.be/pj_C5bQpkV4)
 
 ## What is a QuadTree?
 QuadTree is a recusive data structure that is used for spatial partitioning. It is particularly 
