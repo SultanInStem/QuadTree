@@ -14,15 +14,15 @@ Currently in the update(float dt) in Canvas.cpp, I am rebuilding all the childre
 
 ## Getting Started on macOS
 
-- 1) Clone repository 
+-  Clone repository 
     ```sh
     git clone https://github.com/rick-n-shawty/QuadTree.git
     ```
-- 2) Make the executable 
+-   Make the executable 
     ```sh
     make 
     ```
-- 3) Run the program 
+-  Run the program 
     ```sh
     ./bin/quadtree
     ```
