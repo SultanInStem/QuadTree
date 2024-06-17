@@ -15,7 +15,7 @@ Canvas::Canvas(int width, int height, int numPoints){
 
 
     for(int i = 0; i < numPoints; i++){
-        myPoints.push_back(new Point(randomInt(0, width), randomInt(30, height), 4));
+        myPoints.push_back(new Point(randomInt(0, width - 500), randomInt(30, height - 200), 4));
         myPoints[i]->setVelocity(0.1,0.1);
         qtree->insert(myPoints[i]);
     }
@@ -78,6 +78,8 @@ void Canvas::update(float dt){
 
     for(int i = 0; i < myPoints.size(); i++){
         myPoints[i]->setColor(sf::Color::White);
+        myPoints[i]->move(window.getSize().x, window.getSize().y, dt); 
+        myPoints[i]->show(window);
         qtree->insert(myPoints[i]);
     }
 
