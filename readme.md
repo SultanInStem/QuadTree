@@ -1,7 +1,7 @@
 # QuadTree data structure implementation for collision detection 
 
 ## Demo 
-
+![](https://github.com/rick-n-shawty/QuadTree/blob/main/QuadTreeVid.gif)
 
 ## What is a QuadTree?
 QuadTree is a recusive data structure that is used for spatial partitioning. It is particularly 
